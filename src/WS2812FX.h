@@ -120,6 +120,8 @@
 #define CLR_CYCLE       (_seg_rt->aux_param2 &= ~CYCLE)
 #define CLR_FRAME_CYCLE (_seg_rt->aux_param2 &= ~(FRAME | CYCLE))
 
+#define BASIC_MODES
+
 class WS2812FX : public Adafruit_NeoPixel {
 
   public:
@@ -480,7 +482,11 @@ class WS2812FXT {
 };
 
 #if defined(ESP8266) || defined(ESP32)
-#include "modes_esp.h"
+  #if defined(BASIC_MODES)
+  #include "modes_esp_basic.h"
+  #else
+  #include "modes_esp.h"
+  #endif
 #else
 #include "modes_arduino.h"
 #endif

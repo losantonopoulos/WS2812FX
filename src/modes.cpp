@@ -769,7 +769,14 @@ uint16_t WS2812FX::mode_random_wipe_bright(void) {
  * Custom modes
  */
 uint16_t WS2812FX::mode_custom_0() {
-  return customModes[0]();
+
+  uint32_t color = 0x0;
+  fill(color, _seg->start, _seg_len);
+
+  SET_CYCLE;
+  return _seg->speed;
+  
+  //return customModes[0]();
 }
 uint16_t WS2812FX::mode_custom_1() {
   return customModes[1]();
